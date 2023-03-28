@@ -5,3 +5,4 @@ tmp/
 
 .pre-commit-config.yaml
 /.devenv/
+/.terraform/

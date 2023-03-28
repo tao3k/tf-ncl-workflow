@@ -1,0 +1,14 @@
+#+TITLE: README
+#+AUTHOR: GuangTao Zhang
+#+EMAIL: gtrunsec@hardenedlinux.org
+#+DATE: 2023-03-28 Tue 02:42
+
+
+- generating a Nickel contract out of tf-ncl,
+- evaluating a Nickel configuration
+- calling Terraform
+
+#+begin_src sh
+nix develop --command , run-terraform hello-tf.ncl init
+nix develop --command , run-terraform hello-tf.ncl apply
+#+end_src
