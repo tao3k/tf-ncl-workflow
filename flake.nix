@@ -95,6 +95,7 @@
               self.devenvModules.lint
               self.devenvModules.rust
               self.devenvModules.tf
+              self.devenvModules.nickel
             ];
           };
         };
