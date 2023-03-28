@@ -9,6 +9,17 @@
 - calling Terraform
 
 #+begin_src sh
-nix develop --command , run-terraform hello-tf.ncl init
-nix develop --command , run-terraform hello-tf.ncl apply
+nix develop --command , run-terraform ./ncl/hello-tf.ncl init
+nix develop --command , run-terraform ./ncl/hello-tf.ncl apply
 #+end_src
+
+
+
+
+
+
+* Future Work
+** TODO Add Prefect plugins
+** TODO Add Prefect Pipeline
+** TODO Add Makes Workflow
+** TODO Add Real-time doc for generating Types or descriptions
