@@ -7,18 +7,16 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
   };
   inputs = {
-    std.url = "github:divnix/std";
-    std.inputs.nixpkgs.follows = "nixpkgs";
+    std.follows = "std-ext/std";
     std.inputs.paisano-mdbook-preprocessor.follows = "std/blank";
     std-ext.url = "github:gtrunsec/std-ext";
-    std-ext.inputs.std.follows = "std";
     std-ext.inputs.nixpkgs.follows = "nixpkgs";
-    std-ext.inputs.org-roam-book-template.follows = "std/blank";
   };
 
   inputs = {
     tf-ncl.url = "github:tweag/tf-ncl";
     tf-ncl.inputs.nixpkgs.follows = "nixpkgs";
+    nickel.follows = "tf-ncl/nickel";
     topiary.url = "github:tweag/topiary";
   };
   outputs = inputs @ {
@@ -33,20 +31,19 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = inputs.std-ext.x86_64-linux.common.lib.callFlake ./lock {};
+    __inputs__ = inputs.std-ext.inputs.flops.inputs.call-flake ./lock;
   in
     flake-parts.lib.mkFlake {
       inputs = inputs // __inputs__;
     } {
       inherit systems;
       # Raw flake outputs (generally not system-dependent)
-      flake = {
-        devenvModules = inputs.std-ext.lib.digga.rakeLeaves ./devenvModules;
-      };
+      flake = {};
       std.grow.cellsFrom = ./cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
         #: lib
         (functions "lib")
+        (functions "configs")
         (nixago "nixago")
         (installables "packages")
 
@@ -55,7 +52,6 @@
 
         (devshells "devshells")
         (data "devshellsProfiles")
-        (nixago "nixago")
       ];
       imports = [
         inputs.std.flakeModule
@@ -71,6 +67,8 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             inputs.topiary.packages.${pkgs.system}.default
+            inputs.nickel.packages.${pkgs.system}.default
+            inputs.nickel.packages.${pkgs.system}.lsp-nls
           ];
         };
       };
