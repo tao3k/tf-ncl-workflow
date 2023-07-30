@@ -8,9 +8,9 @@
   };
   inputs = {
     std.follows = "std-ext/std";
-    std.inputs.paisano-mdbook-preprocessor.follows = "std/blank";
     std-ext.url = "github:gtrunsec/std-ext";
     std-ext.inputs.nixpkgs.follows = "nixpkgs";
+    flops.follows = "std-ext/flops";
   };
 
   inputs = {
@@ -50,8 +50,8 @@
         #: presets
         (nixago "nixago")
 
-        (devshells "devshells")
-        (data "devshellsProfiles")
+        (devshells "shells")
+        (data "shellsProfiles")
       ];
       imports = [
         inputs.std.flakeModule
@@ -64,13 +64,14 @@
         self',
         ...
       }: {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            inputs.topiary.packages.${pkgs.system}.default
-            inputs.nickel.packages.${pkgs.system}.default
-            inputs.nickel.packages.${pkgs.system}.lsp-nls
-          ];
-        };
+        devShells = inputs.tenzir-devops.inputs.std.harvest inputs.self [["automation" "shells"]];
+        # devShells.default = pkgs.mkShell {
+        #   buildInputs = [
+        #     inputs.topiary.packages.${pkgs.system}.default
+        #     inputs.nickel.packages.${pkgs.system}.default
+        #     inputs.nickel.packages.${pkgs.system}.lsp-nls
+        #   ];
+        # };
       };
     };
 }

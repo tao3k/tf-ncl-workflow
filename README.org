@@ -6,16 +6,12 @@
 
 - generating a Nickel contract out of tf-ncl,
 - evaluating a Nickel configuration
-- calling Terraform
+- calling Terraform commands with configs
 
 #+begin_src sh
-nix develop --command , run-terraform ./ncl/hello-tf.ncl init
-nix develop --command , run-terraform ./ncl/hello-tf.ncl apply
+nix develop --command template init
+nix develop --command template ./ncl/hello-tf.ncl apply
 #+end_src
-
-
-
-
 
 
 * Future Work

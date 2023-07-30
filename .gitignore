@@ -6,3 +6,8 @@ tmp/
 .pre-commit-config.yaml
 /.devenv/
 /.terraform/
+
+/.data
+
+# nixago: ignore-linked-files
+/treefmt.toml

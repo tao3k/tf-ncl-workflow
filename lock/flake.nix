@@ -1,7 +1,7 @@
 {
   description = "A very basic flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/96f6f7c7fc7da4d3effb7f059a441634f42bea12";
+    nixpkgs.url = "github:NixOS/nixpkgs/d2b52322f35597c62abf56de91b0236746b2a03d";
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
   };
