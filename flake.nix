@@ -40,7 +40,9 @@
     } {
       inherit systems;
       # Raw flake outputs (generally not system-dependent)
-      flake = {};
+      flake = {
+        devShells = inputs.std.harvest inputs.self [["automation" "shells"]];
+      };
       std.grow.cellsFrom = ./cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
         #: lib
@@ -65,15 +67,6 @@
         inputs',
         self',
         ...
-      }: {
-        devShells = inputs.tenzir-devops.inputs.std.harvest inputs.self [["automation" "shells"]];
-        # devShells.default = pkgs.mkShell {
-        #   buildInputs = [
-        #     inputs.topiary.packages.${pkgs.system}.default
-        #     inputs.nickel.packages.${pkgs.system}.default
-        #     inputs.nickel.packages.${pkgs.system}.lsp-nls
-        #   ];
-        # };
-      };
+      }: {};
     };
 }

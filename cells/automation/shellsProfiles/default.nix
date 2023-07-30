@@ -2,7 +2,7 @@
   inputs,
   cell,
 }: let
-  inherit (inputs) nixpkgs tf-ncl terraform-providers;
+  inherit (inputs) nixpkgs nickel topiary terraform-providers;
   terraform-providers-bin = terraform-providers.legacyPackages.providers;
 
   providers = p: {
@@ -17,6 +17,11 @@
     # inherit (terraform-providers-bin.cloudflare) cloudflare;
   };
 in {
+  packages = [
+    nickel.packages.default
+    nickel.packages.lsp-nls
+    topiary.packages.default
+  ];
   commands = [
     {
       package = cell.lib.mkTfCommand "template" providers;
