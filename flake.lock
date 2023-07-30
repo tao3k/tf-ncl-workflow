@@ -1569,14 +1569,17 @@
         "std": "std"
       },
       "locked": {
-        "lastModified": 1690703378,
+        "lastModified": 1690703623,
         "narHash": "sha256-9BNlVyfusQwEpK+uV0hSaoCc/lDSc99D966QrdNMtp8=",
-        "type": "git",
-        "url": "file:///home/guangtao/ghq/github.com/GTrunSec/std-ext"
+        "owner": "gtrunsec",
+        "repo": "std-ext",
+        "rev": "c0974001915475ab249a21d6cac91892a012b6be",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/guangtao/ghq/github.com/GTrunSec/std-ext"
+        "owner": "gtrunsec",
+        "repo": "std-ext",
+        "type": "github"
       }
     },
     "systems": {
