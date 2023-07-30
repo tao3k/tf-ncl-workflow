@@ -33,7 +33,7 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = removeAttrs (inputs.std-ext.inputs.flops.inputs.call-flake ./lock).inputs ["nixpkgs"];
+    __inputs__ = removeAttrs (inputs.std-ext.inputs.flops.inputs.call-flake ./nix/lock).inputs ["nixpkgs"];
   in
     flake-parts.lib.mkFlake {
       inputs = inputs // __inputs__;
@@ -43,7 +43,7 @@
       flake = {
         devShells = inputs.std.harvest inputs.self [["automation" "shells"]];
       };
-      std.grow.cellsFrom = ./cells;
+      std.grow.cellsFrom = ./nix/cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
         #: lib
         (functions "lib")
