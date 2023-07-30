@@ -2,7 +2,7 @@
   inputs,
   cell,
 }: let
-  inherit (inputs) nixpkgs nickel topiary terraform-providers;
+  inherit (inputs) nixpkgs nickel terraform-providers;
   terraform-providers-bin = terraform-providers.legacyPackages.providers;
 
   providers = p: {
@@ -30,7 +30,6 @@ in {
   packages = [
     nickel.packages.default
     nickel.packages.lsp-nls
-    topiary.packages.default
   ];
   commands = [
     {
@@ -40,13 +39,6 @@ in {
     {
       package = cell.lib.mkTfCommand "github-users" github-users;
       help = "github-users: Terraform with tf-nickel";
-    }
-    {
-      name = "fmt-all-ncl";
-      command = ''
-        find . -type f -name "*.ncl" -exec topiary --in-place --input-file {} \;
-      '';
-      help = "Format all ncl files in the current directory";
     }
   ];
 }

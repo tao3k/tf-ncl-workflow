@@ -12,7 +12,8 @@ in {
       cell.shellsProfiles.default
     ];
     nixago = [
-      inputs.std-ext.preset.nixago.treefmt
+      (inputs.std-ext.preset.nixago.treefmt
+        inputs.std-ext.preset.configs.treefmt.topiary)
     ];
   };
 }

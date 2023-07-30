@@ -16,8 +16,8 @@
   inputs = {
     tf-ncl.url = "github:tweag/tf-ncl";
     tf-ncl.inputs.nixpkgs.follows = "nixpkgs";
+    tf-ncl.inputs.topiary.follows = "";
     nickel.follows = "tf-ncl/nickel";
-    topiary.url = "github:tweag/topiary";
     terraform-providers.url = "github:numtide/nixpkgs-terraform-providers-bin";
     terraform-providers.inputs.nixpkgs.follows = "nixpkgs";
   };
