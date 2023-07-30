@@ -10,7 +10,7 @@
 
 #+begin_src sh
 nix develop --command template init
-nix develop --command template ./ncl/hello-tf.ncl apply
+nix develop --command template ./srcs/hello-tf.ncl apply
 #+end_src
 
 
