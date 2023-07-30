@@ -18,6 +18,8 @@
     tf-ncl.inputs.nixpkgs.follows = "nixpkgs";
     nickel.follows = "tf-ncl/nickel";
     topiary.url = "github:tweag/topiary";
+    terraform-providers.url = "github:numtide/nixpkgs-terraform-providers-bin";
+    terraform-providers.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs @ {
     self,
@@ -31,7 +33,7 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = inputs.std-ext.inputs.flops.inputs.call-flake ./lock;
+    __inputs__ = removeAttrs (inputs.std-ext.inputs.flops.inputs.call-flake ./lock).inputs ["nixpkgs"];
   in
     flake-parts.lib.mkFlake {
       inputs = inputs // __inputs__;

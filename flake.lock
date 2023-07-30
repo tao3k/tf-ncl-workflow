@@ -504,11 +504,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680392223,
-        "narHash": "sha256-n3g7QFr85lDODKt250rkZj2IFS3i4/8HBU2yKHO3tqw=",
+        "lastModified": 1688466019,
+        "narHash": "sha256-VeM2akYrBYMsb4W/MmBo1zmaMfgbL4cH3Pu8PGyIwJ0=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "dcc36e45d054d7bb554c9cdab69093debd91a0b5",
+        "rev": "8e8d955c22df93dbe24f19ea04f47a74adbdc5ec",
         "type": "github"
       },
       "original": {
@@ -1649,6 +1649,7 @@
           "std"
         ],
         "std-ext": "std-ext",
+        "terraform-providers": "terraform-providers",
         "tf-ncl": "tf-ncl",
         "topiary": "topiary_3"
       }
@@ -2228,6 +2229,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "terraform-providers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690677903,
+        "narHash": "sha256-ihn9zEkUNfIFbrtr7h1RiTBA/L2cAGn+c2xcQodKT/o=",
+        "owner": "numtide",
+        "repo": "nixpkgs-terraform-providers-bin",
+        "rev": "3c5bb6cbfcb61130eaf394dae60ceb5d8afb166c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nixpkgs-terraform-providers-bin",
         "type": "github"
       }
     },
