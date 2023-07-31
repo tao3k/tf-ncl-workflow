@@ -38,6 +38,7 @@ in {
           exit 1
         fi
         ENTRY="''${1}"
+        ENTRY_DIR=$(dirname "$ENTRY")
         shift
         ln -snfT ${ncl-schema} "$PRJ_DATA_DIR"/tf-ncl/${name}/schema.ncl
         nickel export > "$PRJ_DATA_DIR"/tf-ncl/${name}/main.tf.json <<EOF
@@ -48,7 +49,7 @@ in {
            --dir "$PRJ_DATA_DIR"/tf-ncl/${name} \
            --repository ${git.repo} \
            --ref ${git.ref} \
-           --state "''${ENTRY}/state.json" \
+           --state "''${ENTRY_DIR}/state.json" \
            terraform "$@"
       '';
     };

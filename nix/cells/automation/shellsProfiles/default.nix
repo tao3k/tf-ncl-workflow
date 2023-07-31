@@ -33,7 +33,7 @@ in {
   ];
   commands = [
     {
-      package = cell.lib.mkTfCommand "template" providers;
+      package = cell.lib.mkTfCommand "hello-tf" providers;
       help = "null: Terraform with tf-nickel";
     }
     {
