@@ -33,12 +33,19 @@ in {
   ];
   commands = [
     {
-      package = cell.lib.mkTfCommand "hello-tf" providers;
-      help = "null: Terraform with tf-nickel";
+      package = cell.lib.mkTfCommand "hello-tf-git" providers {
+        repo = "git@github.com:GTrunSec/tf-ncl-workflow.git";
+        ref = "main";
+      };
+      help = "null: terraform-backend-git with tf-nickel";
     }
     {
-      package = cell.lib.mkTfCommand "github-users" github-users;
-      help = "github-users: Terraform with tf-nickel";
+      package = cell.lib.mkTfCommand "hello-tf" providers {};
+      help = "null: terraform with tf-nickel";
+    }
+    {
+      package = cell.lib.mkTfCommand "github-users" github-users {};
+      help = "github-users: terraform with tf-nickel";
     }
   ];
 }

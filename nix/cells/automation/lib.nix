@@ -6,16 +6,12 @@
   inherit (inputs) tf-ncl nickel nixpkgs;
   l = inputs.nixpkgs.lib // builtins;
 in {
-  mkTfCommand = name: tfPlugins: let
+  mkTfCommand = name: tfPlugins: git: let
     terraform-with-plugins =
       nixpkgs.terraform.withPlugins
       (p: nixpkgs.lib.attrValues (tfPlugins p));
 
     ncl-schema = tf-ncl.generateSchema tfPlugins;
-    git = {
-      repo = "git@github.com:GTrunSec/tf-ncl-workflow.git";
-      ref = "main";
-    };
   in
     writeShellApplication {
       inherit name;
@@ -38,19 +34,28 @@ in {
           exit 1
         fi
         ENTRY="''${1}"
-        ENTRY_DIR=$(dirname "$ENTRY")
         shift
         ln -snfT ${ncl-schema} "$PRJ_DATA_DIR"/tf-ncl/${name}/schema.ncl
         nickel export > "$PRJ_DATA_DIR"/tf-ncl/${name}/main.tf.json <<EOF
           (import "''${ENTRY}").renderable_config
         EOF
 
-        terraform-backend-git git \
-           --dir "$PRJ_DATA_DIR"/tf-ncl/${name} \
-           --repository ${git.repo} \
-           --ref ${git.ref} \
-           --state "''${ENTRY_DIR}/state.json" \
-           terraform "$@"
+        ${
+          if git != {}
+          then ''
+            ENTRY_DIR="$(dirname "$ENTRY")"
+
+            terraform-backend-git git \
+               --dir "$PRJ_DATA_DIR"/tf-ncl/${name} \
+               --repository ${git.repo} \
+               --ref ${git.ref} \
+               --state "''${ENTRY_DIR}/state.json" \
+               terraform "$@"
+          ''
+          else ''
+            terraform -chdir="$PRJ_DATA_DIR"/tf-ncl/${name} "$@"
+          ''
+        }
       '';
     };
 }
