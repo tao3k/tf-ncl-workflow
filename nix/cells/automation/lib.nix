@@ -17,6 +17,7 @@ in {
       inherit name;
       runtimeEnv = {
         TF_IN_AUTOMATION = 1;
+        TF_PLUGIN_CACHE_DIR = "$PRJ_CACHE_HOME/tf-plugin-cache";
       };
       runtimeInputs = with inputs.nixpkgs; [
         nickel.packages.default
@@ -25,8 +26,10 @@ in {
       ];
       text = ''
         set -e
+
         if [[ ! -d "$PRJ_DATA_DIR"/tf-ncl/${name} ]]; then
            mkdir -p "$PRJ_DATA_DIR"/tf-ncl/${name}
+           mkdir -p "$PRJ_CACHE_HOME"/tf-plugin-cache
         fi
 
         if [[ "$#" -le 1 ]]; then
