@@ -12,12 +12,20 @@ in {
       (p: nixpkgs.lib.attrValues (tfPlugins p));
 
     ncl-schema = tf-ncl.generateSchema tfPlugins;
+    git = {
+      repo = "git@github.com:GTrunSec/tf-ncl-workflow.git";
+      ref = "main";
+    };
   in
     writeShellApplication {
       inherit name;
+      runtimeEnv = {
+        TF_IN_AUTOMATION = 1;
+      };
       runtimeInputs = with inputs.nixpkgs; [
         nickel.packages.default
         terraform-with-plugins
+        terraform-backend-git
       ];
       text = ''
         set -e
@@ -35,7 +43,13 @@ in {
         nickel export > "$PRJ_DATA_DIR"/tf-ncl/${name}/main.tf.json <<EOF
           (import "''${ENTRY}").renderable_config
         EOF
-        terraform -chdir="$PRJ_DATA_DIR"/tf-ncl/${name} "$@"
+
+        terraform-backend-git git \
+           --dir "$PRJ_DATA_DIR"/tf-ncl/${name} \
+           --repository ${git.repo} \
+           --ref ${git.ref} \
+           --state "''${ENTRY}/state.json" \
+           terraform "$@"
       '';
     };
 }
