@@ -1,10 +1,10 @@
 let Tf = import "../../.data/tf-ncl/hello-tf/schema.ncl" in
 {
-  config.resource.null_resource.hello-world = {
+  config.resource.null_resource.hello-tf-ncl = {
     provisioner.local-exec = [
       {
         command = m%"
-        echo 'Hello, world!'
+        echo 'Hello, tf-ncl!'
         "%
       }
     ],
