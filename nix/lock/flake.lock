@@ -40,7 +40,8 @@
     "root": {
       "inputs": {
         "fenix": "fenix",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "terranix-module-github": "terranix-module-github"
       }
     },
     "rust-analyzer-src": {
@@ -57,6 +58,22 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "terranix-module-github": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687556863,
+        "narHash": "sha256-0CLnVJN1hnklq7KbJ2niP9QDCt1fKG3otyo2hOH+CcQ=",
+        "owner": "terranix",
+        "repo": "terranix-module-github",
+        "rev": "b8b9c9b4414222a67774062c84085253f56a05cb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "terranix",
+        "repo": "terranix-module-github",
         "type": "github"
       }
     }

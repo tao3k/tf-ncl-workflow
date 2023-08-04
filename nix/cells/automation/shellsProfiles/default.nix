@@ -30,7 +30,7 @@ in
     {
       package = cell.lib.mkTfCommand "hello-tf-git" providers {
         repo = "git@github.com:GTrunSec/tf-ncl-workflow.git";
-        ref = "main";
+        ref = "deploy";
       };
       help = "null: terraform-backend-git with tf-nickel";
     }
