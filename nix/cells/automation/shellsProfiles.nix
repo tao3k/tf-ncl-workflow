@@ -2,7 +2,7 @@
   src = ./shellsProfiles;
   inputs = {
     inherit cell;
-    inputs = removeAttrs inputs ["self"];
+    inputs = removeAttrs inputs [ "self" ];
   };
-})
-.outputsForTarget "default"
+}).outputsForTarget
+  "default"
