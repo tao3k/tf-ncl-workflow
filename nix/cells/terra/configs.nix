@@ -38,7 +38,7 @@
       };
 
       config = mkMerge [
-        {github.enable = true;}
+        { github.enable = true; }
         (mkIf cfg.enable { provider.github = cfg.provider; })
 
         (mkIf (cfg.enable && cfg.provider.token == "\${ var.${default_token} }") {

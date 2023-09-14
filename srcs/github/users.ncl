@@ -1,5 +1,5 @@
 {
-  yannham = {
+  guangtao = {
     is-admin = true,
     extra-teams = ["nickel"],
   },

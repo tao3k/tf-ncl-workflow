@@ -49,7 +49,7 @@
       # Raw flake outputs (generally not system-dependent)
       flake = {
         devShells = inputs.std.harvest inputs.self [ [
-          "automation"
+          "repo"
           "shells"
         ] ];
       };

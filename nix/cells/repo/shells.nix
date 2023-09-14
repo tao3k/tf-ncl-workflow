@@ -9,8 +9,8 @@ in
   default = lib.dev.mkShell {
     imports = [ cell.shellsProfiles.default ];
     nixago = [
-      (inputs.std-ext.preset.nixago.treefmt
-        inputs.std-ext.preset.configs.treefmt.topiary
+      (inputs.std-ext.presets.nixago.treefmt
+        inputs.std-ext.presets.configs.treefmt.topiary
       )
     ];
   };

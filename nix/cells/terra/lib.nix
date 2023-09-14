@@ -4,7 +4,8 @@ let
   pkgs = inputs.nixpkgs;
 in
 {
-  mkTerra = config:
+  mkTerra =
+    config:
     (terraEval {
       inherit pkgs; # only effectively required for `pkgs.lib`
       terranix_config = {
