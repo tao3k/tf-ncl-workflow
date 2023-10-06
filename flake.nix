@@ -1,5 +1,5 @@
 {
-  description = "std && flake-parts && devenv template";
+  description = "tf-ncl with std&flak-parts";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -18,10 +18,6 @@
     tf-ncl.inputs.nixpkgs.follows = "nixpkgs";
     tf-ncl.inputs.topiary.follows = "";
     nickel.follows = "tf-ncl/nickel";
-
-    terranix.url = "github:terranix/terranix";
-    terranix.inputs.nixpkgs.follows = "nixpkgs";
-    terranix.inputs.terranix-examples.follows = "";
 
     terraform-providers.url = "github:numtide/nixpkgs-terraform-providers-bin";
     terraform-providers.inputs.nixpkgs.follows = "nixpkgs";
