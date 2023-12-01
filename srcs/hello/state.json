@@ -1,0 +1,26 @@
+{
+  "version": 4,
+  "terraform_version": "1.6.5",
+  "serial": 1,
+  "lineage": "53aef557-4ce6-6021-4382-7fb618bde0b1",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "null_resource",
+      "name": "hello-tf-ncl",
+      "provider": "provider[\"registry.terraform.io/hashicorp/null\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "3459003092566863913",
+            "triggers": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
