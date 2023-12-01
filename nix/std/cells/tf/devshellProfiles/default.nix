@@ -1,6 +1,6 @@
 {inputs, cell}:
 let
-  inherit (nixpkgs) terraform-providers-bin;
+  inherit (nixpkgs) terraform-providers;
   nixpkgs =
     (import inputs.nixpkgs.path {
       config = {
@@ -14,14 +14,14 @@ let
 
   providers = p: {
     inherit (p) null;
-    inherit (terraform-providers-bin.hashicorp)
+    inherit (terraform-providers.hashicorp)
     # inherit (terraform-providers-bin.dmacvicar) libvirt;
     # inherit (terraform-providers-bin.cloudflare) cloudflare;
   };
 
   github-users = p: {
     inherit (p) null external;
-    inherit (terraform-providers-bin.integrations) github;
+    inherit (terraform-providers) github;
   };
 in
 {
@@ -34,13 +34,13 @@ in
       };
       help = "null: terraform-backend-git with tf-nickel";
     }
-    # {
-    #   package = cell.lib.mkTfCommand "hello-tf" nixpkgs providers { };
-    #   help = "null: terraform with tf-nickel";
-    # }
-    # {
-    #   package = cell.lib.mkTfCommand "github-users" nixpkgs github-users { };
-    #   help = "github-users: terraform with tf-nickel";
-    # }
+    {
+      package = cell.lib.mkTfCommand "hello-tf" nixpkgs providers {};
+      help = "null: terraform with tf-nickel";
+    }
+    {
+      package = cell.lib.mkTfCommand "github-users" nixpkgs github-users {};
+      help = "github-users: terraform with tf-nickel";
+    }
   ];
 }

@@ -10,7 +10,7 @@ l.mapAttrs (_: std.lib.dev.mkShell) {
       name = "tf-nickel DevShell";
       imports = [
         cell.pops.devshellProfiles.exports.default.nickel
-        inputs.cells.tf.shellsProfiles.default
+        inputs.cells.tf.devshellProfiles.default
       ];
 
       nixago = [

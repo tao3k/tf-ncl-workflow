@@ -1,5 +1,5 @@
 (inputs.omnibus.load {
-  src = ./shellsProfiles;
+  src = ./devshellProfiles;
   inputs = {
     inherit cell inputs;
   };

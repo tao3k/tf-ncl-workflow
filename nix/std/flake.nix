@@ -28,7 +28,7 @@
         cellBlocks = with std.blockTypes; [
           (installables "packages")
 
-          (functions "shellsProfiles")
+          (functions "devshellProfiles")
           (devshells "shells")
 
           (runnables "entrypoints")
