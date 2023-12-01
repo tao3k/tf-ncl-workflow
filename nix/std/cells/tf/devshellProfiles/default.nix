@@ -14,7 +14,6 @@ let
 
   providers = p: {
     inherit (p) null;
-    inherit (terraform-providers.hashicorp)
     # inherit (terraform-providers-bin.dmacvicar) libvirt;
     # inherit (terraform-providers-bin.cloudflare) cloudflare;
   };
@@ -30,7 +29,7 @@ in
     {
       package = cell.lib.mkTfCommand "hello-tf-git" nixpkgs providers {
         repo = "git@github.com:GTrunSec/tf-ncl-workflow.git";
-        ref = "deploy";
+        ref = "main";
       };
       help = "null: terraform-backend-git with tf-nickel";
     }
