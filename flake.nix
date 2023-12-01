@@ -6,16 +6,9 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
   };
-  inputs = {
-    std.follows = "std-ext/std";
-    std-ext.url = "github:gtrunsec/std-ext";
-    std-ext.inputs.nixpkgs.follows = "nixpkgs";
-    flops.follows = "std-ext/flops";
-  };
 
   inputs = {
-    tf-ncl.url = "github:tweag/tf-ncl";
-    tf-ncl.inputs.nixpkgs.follows = "nixpkgs";
+    tf-ncl.url = "github:gtrunsec/tf-ncl/dev";
     tf-ncl.inputs.topiary.follows = "";
     nickel.follows = "tf-ncl/nickel";
 
@@ -36,34 +29,12 @@
         "aarch64-linux"
         "aarch64-darwin"
       ];
-      __inputs__ =
-        removeAttrs (inputs.std-ext.inputs.flops.inputs.call-flake ./nix/lock).inputs
-          [ "nixpkgs" ];
     in
-    flake-parts.lib.mkFlake { inputs = inputs // __inputs__; } {
+    flake-parts.lib.mkFlake {inherit inputs;} {
       inherit systems;
       # Raw flake outputs (generally not system-dependent)
-      flake = {
-        devShells = inputs.std.harvest inputs.self [ [
-          "repo"
-          "shells"
-        ] ];
-      };
-      std.grow.cellsFrom = ./nix/cells;
-      std.grow.cellBlocks = with inputs.std.blockTypes; [
-        #: lib
-        (functions "lib")
-        (functions "configs")
-        (nixago "nixago")
-        (installables "packages")
-
-        #: presets
-        (nixago "nixago")
-
-        (devshells "shells")
-        (data "shellsProfiles")
-      ];
-      imports = [ inputs.std.flakeModule ];
+      flake = {};
+      imports = [];
       # Flake outputs that will be split by system
       perSystem =
         {
@@ -73,6 +44,12 @@
           self',
           ...
         }:
-        { };
+        {};
     };
+  nixConfig = {
+    extra-substituters = ["https://tweag-nickel.cachix.org"];
+    extra-trusted-public-keys = [
+      "tweag-nickel.cachix.org-1:GIthuiK4LRgnW64ALYEoioVUQBWs0jexyoYVeLDBwRA="
+    ];
+  };
 }

@@ -1,7 +1,6 @@
-(inputs.flops.lib.haumea.pops.default.setInit {
+(inputs.omnibus.load {
   src = ./shellsProfiles;
   inputs = {
     inherit cell inputs;
   };
-}).outputs
-  { }
+})

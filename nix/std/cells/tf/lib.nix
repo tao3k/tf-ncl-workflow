@@ -1,18 +1,20 @@
-{ inputs, cell }:
+{inputs, cell}:
 let
-  inherit (inputs.std-ext.writers.lib) writeShellApplication;
-  inherit (inputs) tf-ncl nickel nixpkgs;
+  inherit (inputs) tf-ncl nickel;
   l = inputs.nixpkgs.lib // builtins;
+  writeShellApplication = inputs.omnibus.ops.writeShellApplication {
+    inherit (inputs) nixpkgs;
+  };
 in
 {
   mkTfCommand =
-    name: tfPlugins: git:
+    name: nixpkgs: tfPlugins: git:
     let
       terraform-with-plugins = nixpkgs.terraform.withPlugins (
         p: nixpkgs.lib.attrValues (tfPlugins p)
       );
 
-      ncl-schema = tf-ncl.generateSchema tfPlugins;
+      ncl-schema = tf-ncl.initSchemaGenerator nixpkgs tfPlugins;
     in
     writeShellApplication {
       inherit name;
@@ -44,7 +46,7 @@ in
           (import "''${ENTRY}").renderable_config
         EOF
 
-        ${if git != { } then
+        ${if git != {} then
           ''
             ENTRY_DIR="$(dirname "$ENTRY")"
 
@@ -58,8 +60,7 @@ in
         else
           ''
             terraform -chdir="$PRJ_DATA_DIR"/tf-ncl/${name} "$@"
-          ''
-        }
+          ''}
       '';
     };
 }
