@@ -8,9 +8,9 @@
   };
 
   inputs = {
-    tf-ncl.url = "github:gtrunsec/tf-ncl/dev";
+    tf-ncl.url = "github:tweag/tf-ncl";
     tf-ncl.inputs.topiary.follows = "";
-    nickel.follows = "tf-ncl/nickel";
+    nickel.url = "github:tweag/nickel";
 
     terraform-providers.url = "github:numtide/nixpkgs-terraform-providers-bin";
     terraform-providers.inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +25,6 @@
     let
       systems = [
         "x86_64-linux"
-        "x86_64-darwin"
         "aarch64-linux"
         "aarch64-darwin"
       ];

@@ -13,8 +13,7 @@ in
       terraform-with-plugins = nixpkgs.terraform.withPlugins (
         p: nixpkgs.lib.attrValues (tfPlugins p)
       );
-
-      ncl-schema = tf-ncl.initSchemaGenerator nixpkgs tfPlugins;
+      ncl-schema = tf-ncl.generateSchema tfPlugins;
     in
     writeShellApplication {
       inherit name;

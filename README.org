@@ -9,8 +9,8 @@
 - calling Terraform commands with configs
 
 #+begin_src sh
-nix develop --command hello-tf ./srcs/hello-tf.ncl init
-nix develop --command hello-tf ./srcs/hello-tf.ncl apply
+nix develop ./nix/std --command hello-tf ./srcs/hello-tf.ncl init
+nix develop ./nix/std --command hello-tf ./srcs/hello-tf.ncl apply
 #+end_src
 
 
