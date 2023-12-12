@@ -13,7 +13,21 @@ in
       terraform-with-plugins = nixpkgs.terraform.withPlugins (
         p: nixpkgs.lib.attrValues (tfPlugins p)
       );
-      ncl-schema = tf-ncl.generateSchema tfPlugins;
+      ncl-schema = initSchemaGenerator nixpkgs tfPlugins;
+      initSchemaGenerator =
+        nixpkgs: providerFn:
+        let
+          generateJsonSchema' =
+            nixpkgs.callPackage
+              (import (tf-ncl + /nix/terraform_schema.nix) (
+                providerFn nixpkgs.terraform-providers.actualProviders
+              ))
+              {inherit (tf-ncl.packages.${nixpkgs.system}) schema-merge;};
+        in
+        nixpkgs.callPackage (tf-ncl + /nix/nickel_schema.nix) {
+          jsonSchema = generateJsonSchema';
+          inherit (tf-ncl.packages.${nixpkgs.system}) tf-ncl;
+        };
     in
     writeShellApplication {
       inherit name;
